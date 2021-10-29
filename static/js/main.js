@@ -4,7 +4,7 @@ $(document).ready(function () {
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: "http://localhost/img_compress/main.php",
+            url: "http://localhost/image_compress//main.php",
             data: new FormData(this),
             contentType: false,
             cache: false,
