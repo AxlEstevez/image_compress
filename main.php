@@ -17,9 +17,9 @@ if(!empty($_FILES['images'])){
 
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
         if(in_array($fileType, $allowsTypes)){
-            // mostrar imagenes
-            $img_info = getimagesize($_FILES['images']['tmp_name'][$key]);
-            $images_arr[] = "data".$img_info["mime"].";base64,".base64_encode(file_get_contents($_FILES['images']['tmp_name'][$key]));
+            if(move_uploaded_file($_FILES['images']['tmp_name'][$key], $targetFilePath)){
+                $images_arr[] = $targetFilePath;
+            }
         }
     }
 
@@ -27,7 +27,8 @@ if(!empty($_FILES['images'])){
     if(!empty($images_arr)){ ?>
         <ul>
         <?php foreach($images_arr as $image_src){ ?>
-            <li><img src="<?php echo $image_src; ?>" alt=""></li>
+            <li><img src="<?php echo $image_src; ?>" alt="" width="250" height="150"></li>
+            <br/>
         <?php } ?>
         </ul>
     <?php }
